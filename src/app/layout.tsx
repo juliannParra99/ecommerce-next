@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
+import Providers from "@/components/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +28,11 @@ export default function RootLayout({
       - Takes the full height of the screen
     */}
         <main className="relative flex flex-col min-h-screen">
-          <Navbar />
-          <div className="flex-grow flex-1">{children}</div>
+          {/* the things which live inside de provider will have access to trpc and to the providers */}
+          <Providers>
+            <Navbar />
+            <div className="flex-grow flex-1">{children}</div>
+          </Providers>
         </main>
       </body>
     </html>

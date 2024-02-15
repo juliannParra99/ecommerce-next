@@ -14,6 +14,7 @@ import {
   AuthCredentialsValidator,
   TAuthCredentialsValidator,
 } from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
 
 //component for a login page using Zod validation and React Hook Form.
 // Validates email and password using AuthCredentialsValidator schema.
@@ -27,6 +28,11 @@ const Page = () => {
   } = useForm<TAuthCredentialsValidator>({
     resolver: zodResolver(AuthCredentialsValidator),
   });
+
+  // Uses the 'anyApiRoute' query from the trpc hook to fetch data and logs the result to the console.
+
+  const { data } = trpc.anyApiRoute.useQuery();
+  console.log(data);
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
     //send data to the server
