@@ -4,19 +4,26 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
 import dotenv from 'dotenv'
+import { Users } from './collections/Users'
 
 // This file configures a Payload CMS project, defining settings for server URL, collections, routes, bundler,
 // meta information for the admin interface, rate limiting, editor configuration, MongoDB database connection,
 // TypeScript type generation, and other project-specific parameters.
 // It utilizes various Payload packages such as bundler-webpack, db-mongodb, and richtext-slate.
 
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+})
+
+
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-  collections: [], 
+  collections: [Users], 
   routes: {
     admin: '/sell',
   },
   admin: {
+    user:"users",
     bundler: webpackBundler(),
     meta: {
       titleSuffix: '- DigitalGiraffe',

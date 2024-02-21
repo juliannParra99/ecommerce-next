@@ -31,11 +31,12 @@ const Page = () => {
 
   // Uses the 'anyApiRoute' query from the trpc hook to fetch data and logs the result to the console.
 
-  const { data } = trpc.anyApiRoute.useQuery();
-  console.log(data);
+  const {mutate, isLoading} = trpc.auth.createPayloadUser.useMutation({
+
+  })
 
   const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
-    //send data to the server
+    mutate({email, password})
   };
 
   return (
